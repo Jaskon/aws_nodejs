@@ -3,6 +3,15 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/app
+  - object: /home/ec2-user/app
+    mode: 644
+    acls:
+     - "d:u::rwx"
+     - "d:g::rwx"
+     - "d:o::rwx"
+    owner: ec2-user
+    type:
+     - directory
 file_exists_behavior: OVERWRITE
 hooks:
   ApplicationStop:
