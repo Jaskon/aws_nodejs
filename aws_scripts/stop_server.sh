@@ -1,3 +1,5 @@
-source /home/ec2-user/.bashrc
+#!/bin/bash
+source /home/ec2-user/.bash_profile
 
-pm2 stop app/index.js
+
+pm2 stop index.js
