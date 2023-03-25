@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     getUsers().then(res => setUsers(res.data));
-  });
+  }, []);
 
   return (
     <div className="App">
