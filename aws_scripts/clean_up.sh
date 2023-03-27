@@ -4,3 +4,5 @@ set -x
 
 
 rm -rf /home/ec2-user/app/node_modules
+rm -rf /home/ec2-user/app/frontend-app/node_modules
+rm -rf /home/ec2-user/app/frontend-app/build
