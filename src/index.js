@@ -3,6 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const port = 3000;
+const messagesRoute = require('./routes/messages');
 
 
 // CORS
@@ -18,7 +19,9 @@ app.get('/users', (req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, '../frontend-app/build')));
+app.use(messagesRoute);
 
 app.listen(port, () => {
     console.log(`App listening on http://localhost:${port}`);
 });
+// TODO: Define webTransport protocol

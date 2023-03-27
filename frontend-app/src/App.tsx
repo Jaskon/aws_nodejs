@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.css';
 import { getUsers } from './api/core';
 import { User } from './model/User';
+import Chat from './components/chat/Chat';
 
 function App() {
   const [ users, setUsers ] = useState<Array<User>>([]);
@@ -12,9 +13,10 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <img src={logo} className={styles.logo} alt="logo" />
+
         <div>
           Users list (async):
         </div>
@@ -25,15 +27,9 @@ function App() {
             </div>
           ) }
         </div>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+        <Chat />
+      </div>
     </div>
   );
 }
