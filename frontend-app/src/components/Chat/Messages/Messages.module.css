@@ -1,0 +1,19 @@
+.message {
+    max-width: 25rem;
+}
+
+.message.myMessage {
+    align-self: end;
+}
+
+.systemMessage {
+    align-self: center;
+}
+.systemMessage.systemMessageError {
+    color: darkred;
+}
+
+.messagesWrapper {
+    display: flex;
+    flex-direction: column;
+}

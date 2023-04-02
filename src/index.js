@@ -1,9 +1,14 @@
 const path = require('path');
+const { createServer } = require('http');
 const cors = require('cors');
 const express = require('express');
-const app = express();
-const port = 3000;
 const messagesRoute = require('./routes/messages');
+const { Server } = require('socket.io');
+const { onSocketConnect } = require('./modules/chat/socket');
+
+const port = 3000;
+const app = express();
+const httpServer = createServer(app);
 
 
 // CORS
@@ -21,7 +26,15 @@ app.get('/users', (req, res, next) => {
 app.use(express.static(path.join(__dirname, '../frontend-app/build')));
 app.use(messagesRoute);
 
-app.listen(port, () => {
+
+// Socket.io
+const io = new Server(httpServer, {
+    serveClient: false,
+    transports: ['websocket'],
+});
+io.on('connection', socket => { onSocketConnect(socket, io) });
+
+
+httpServer.listen(port, () => {
     console.log(`App listening on http://localhost:${port}`);
 });
-// TODO: Define webTransport protocol

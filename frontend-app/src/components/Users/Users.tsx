@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUsers } from '../../api/core';
-import { User } from '../../model/User';
+import { User } from '../../../../model/User';
 
 function Users() {
     const [ users, setUsers ] = useState<Array<User>>([]);

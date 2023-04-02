@@ -10,10 +10,6 @@
     width: 30rem;
 }
 
-.message {
-    max-width: 25rem;
-}
-
-.message.myMessage {
-    align-self: end;
+.messages {
+    margin-bottom: 2rem;
 }
