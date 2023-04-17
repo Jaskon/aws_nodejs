@@ -1,0 +1,25 @@
+.messagesWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    max-width: 25rem;
+
+    &.myMessage {
+        align-self: end;
+    }
+}
+
+.systemMessage {
+    align-self: center;
+    color: mediumseagreen;
+
+    &.systemMessageError {
+        color: darkred;
+    }
+}
+
+.userName {
+    color: green;
+}

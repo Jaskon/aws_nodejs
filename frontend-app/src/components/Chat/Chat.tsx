@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Chat.module.css';
-import { SystemMessage, UserMessage } from '../../../../model/Chat';
+import { IChatMessages } from '../../../../model/Chat';
 import { getMessages } from '../../api/core';
 import { io } from 'socket.io-client';
 import { BASE_URL } from '../../config';
@@ -15,7 +15,7 @@ const socket = io(BASE_URL, {
 ChatSocket.initSocketEvents(socket);
 
 function Chat() {
-    const [messages, setMessages] = useState<Array<UserMessage | SystemMessage>>([]);
+    const [messages, setMessages] = useState<IChatMessages[]>([]);
 
     useEffect(() => {
         getMessages().then(data => {

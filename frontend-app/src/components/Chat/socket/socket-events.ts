@@ -1,8 +1,16 @@
 import React from 'react';
 import { Socket } from 'socket.io-client';
-import { UserMessage, SystemMessage, MyUsername } from '../../../../../model/Chat';
+import {
+    UserMessage,
+    SystemMessage,
+    MyUsername,
+    UserJoined,
+    IChatMessages,
+    UserDisconnected
+} from '../../../../../model/Chat';
 
-let setMessages: React.Dispatch<React.SetStateAction<(UserMessage | SystemMessage)[]>>;
+
+let setMessages: React.Dispatch<React.SetStateAction<(IChatMessages)[]>>;
 let myUserName: string;
 let socket: Socket;
 
@@ -17,6 +25,14 @@ export const initSocketEvents = (_socket: Socket) => {
         setMessages((prevState) => [...prevState, { ...message, type: 'system' }]);
     });
 
+    socket.on('user-joined', (message: UserJoined) => {
+        setMessages((prevState) => [...prevState, { ...message, type: 'user-joined' }]);
+    });
+
+    socket.on('user-disconnected', (message: UserDisconnected) => {
+        setMessages((prevState) => [...prevState, { ...message, type: 'user-disconnected' }]);
+    });
+
     socket.on('my-username', (data: MyUsername) => {
         updateMyUsername(data.name);
     });
@@ -25,7 +41,7 @@ export const initSocketEvents = (_socket: Socket) => {
 
 // TODO: May be move this into sibling file?
 
-export const updateMessagesFunction = (_setMessages: React.Dispatch<React.SetStateAction<(UserMessage | SystemMessage)[]>>) => {
+export const updateMessagesFunction = (_setMessages: React.Dispatch<React.SetStateAction<(IChatMessages)[]>>) => {
     setMessages = _setMessages;
 }
 

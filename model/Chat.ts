@@ -5,6 +5,16 @@ export interface UserMessage {
     message: string,
 }
 
+export interface UserJoined {
+    type: 'user-joined',
+    user: string,
+}
+
+export interface UserDisconnected {
+    type: 'user-disconnected',
+    user: string,
+}
+
 export interface SystemMessage {
     type: 'system',
     id: string,
@@ -14,3 +24,5 @@ export interface SystemMessage {
 export interface MyUsername {
     name: string,
 }
+
+export type IChatMessages = UserMessage | SystemMessage | UserJoined | UserDisconnected;

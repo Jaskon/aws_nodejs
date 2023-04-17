@@ -1,3 +1,5 @@
+// When changing any socket.io event - change the 'readme.md' in this folder!
+
 const { v4: uuid } = require('uuid');
 
 const isMessageValid = (message) => {
@@ -12,7 +14,8 @@ const onSocketConnect = (socket, io) => {
 
     socket.emit('my-username', { name: userName });
 
-    io.emit('system-message', { id: uuid(), message: `User ${userName} joined!` });
+    // io.emit('system-message', { id: uuid(), message: `User ${userName} joined!` });
+    io.emit('user-joined', { id: uuid(), user: userName });
 
     socket.on('message', (data) => {
         if (!isMessageValid(data.message)) {
@@ -23,7 +26,7 @@ const onSocketConnect = (socket, io) => {
     });
 
     socket.on('disconnect', (reason) => {
-        io.emit('system-message', { message: `User ${userName} disconnected.`});
+        io.emit('user-disconnected', { id: uuid(), user: userName });
     });
 }
 
