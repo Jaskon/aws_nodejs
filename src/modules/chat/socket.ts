@@ -1,6 +1,6 @@
 // When changing any socket.io event - change the 'readme.md' in this folder!
 
-const { v4: uuid } = require('uuid');
+import { v4 as uuid } from 'uuid';
 
 const isMessageValid = (message) => {
     if (message.trim() === '') {
@@ -9,7 +9,7 @@ const isMessageValid = (message) => {
     return true;
 }
 
-const onSocketConnect = (socket, io) => {
+export const onSocketConnect = (socket, io) => {
     const userName = uuid().slice(-5);
 
     socket.emit('my-username', { name: userName });
@@ -28,9 +28,4 @@ const onSocketConnect = (socket, io) => {
     socket.on('disconnect', (reason) => {
         io.emit('user-disconnected', { id: uuid(), user: userName });
     });
-}
-
-
-module.exports = {
-    onSocketConnect,
 }

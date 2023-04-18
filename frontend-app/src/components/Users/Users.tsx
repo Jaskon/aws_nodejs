@@ -13,7 +13,7 @@ function Users() {
         <div>
             Users list (testing async):
         </div>
-        <div className={'m-bt-2'}>
+        <div className="mb-4">
             { Object.values(users).map((user) =>
                 <div key={user.id}>
                     { user.name } { user.surname }

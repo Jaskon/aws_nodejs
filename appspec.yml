@@ -24,7 +24,7 @@ hooks:
       timeout: 300
       runas: ec2-user
   AfterInstall:
-    - location: aws_scripts/set-permissions.sh
+    - location: aws_scripts/set_permissions.sh
       timeout: 300
       runas: root
     - location: aws_scripts/install_dependencies.sh

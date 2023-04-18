@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styles from './SendField.module.css';
 
 export function SendField({ onSend }: { onSend: Function }) {
     const [input, setInput] = useState('');
@@ -10,9 +9,9 @@ export function SendField({ onSend }: { onSend: Function }) {
         setInput('');
     }
 
-    return <form onSubmit={formSubmit} className={styles.form}>
+    return <form onSubmit={formSubmit} className="flex flex-row gap-2">
         <input
-            className={styles.input}
+            className="flex-grow"
             onChange={event => setInput(event.target.value)}
             value={input}
         />

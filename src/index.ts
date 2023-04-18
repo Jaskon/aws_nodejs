@@ -1,10 +1,10 @@
-const path = require('path');
-const { createServer } = require('http');
-const cors = require('cors');
-const express = require('express');
-const messagesRoute = require('./routes/messages');
-const { Server } = require('socket.io');
-const { onSocketConnect } = require('./modules/chat/socket');
+import path from 'path';
+import { createServer } from 'http';
+import cors from 'cors';
+import express from 'express';
+import { Server } from 'socket.io';
+import messagesRoute from './routes/messages';
+import { onSocketConnect } from './modules/chat/socket';
 
 const port = 3000;
 const app = express();

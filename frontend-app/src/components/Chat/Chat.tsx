@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Chat.module.css';
 import { IChatMessages } from '../../../../model/Chat';
 import { getMessages } from '../../api/core';
 import { io } from 'socket.io-client';
@@ -32,9 +31,9 @@ function Chat() {
     }, []);
 
     return (
-        <div className={styles.wrapper}>
+        <div className="border border-solid rounded-2xl border-black p-8 flex flex-col text-[16pt] max-h-[100rem] w-[30rem]">
             <Messages
-                className={styles.messages}
+                className="mb-4"
                 messages={messages}
             />
 
