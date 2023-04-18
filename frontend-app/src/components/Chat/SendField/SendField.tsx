@@ -15,6 +15,6 @@ export function SendField({ onSend }: { onSend: Function }) {
             onChange={event => setInput(event.target.value)}
             value={input}
         />
-        <button type={"submit"}>Send</button>
+        <button type={"submit"} className="border border-white rounded-md pl-2 pr-2">Send</button>
     </form>;
 }
