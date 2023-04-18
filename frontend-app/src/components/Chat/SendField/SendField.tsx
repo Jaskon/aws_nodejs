@@ -11,7 +11,7 @@ export function SendField({ onSend }: { onSend: Function }) {
 
     return <form onSubmit={formSubmit} className="flex flex-row gap-2">
         <input
-            className="flex-grow"
+            className="flex-grow text-black w-full"
             onChange={event => setInput(event.target.value)}
             value={input}
         />

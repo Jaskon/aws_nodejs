@@ -12,7 +12,7 @@ export function Messages(
                 if (one.type === 'user') {
                     return (
                         <div className={cls(
-                                "max-w-[25rem]",
+                                "max-w-[25rem] text-start",
                                 {"text-end": isMyUsername(one.user)}
                             )} key={one.id}>
                                 {one.user}: {one.message}

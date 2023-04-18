@@ -31,16 +31,18 @@ function Chat() {
     }, []);
 
     return (
-        <div className="border border-solid rounded-2xl border-black p-8 flex flex-col text-[16pt] max-h-[100rem] w-[30rem]">
+        <div className="
+                border border-solid rounded-2xl border-black
+                p-8 flex flex-col text-[16pt]
+                max-h-[100rem] max-w-[30rem] w-full
+        ">
             <Messages
                 className="mb-4"
                 messages={messages}
             />
 
 
-            <SendField
-                onSend={(data: string) => ChatSocket.sendMessage(data)}
-            />
+            <SendField onSend={(data: string) => ChatSocket.sendMessage(data)} />
         </div>
     );
 }
