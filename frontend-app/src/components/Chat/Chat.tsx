@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { IChatMessages } from '../../../../model/Chat';
 import { getMessages } from '../../api/core';
 import { io } from 'socket.io-client';
-import { BASE_URL } from '../../config';
 import ChatSocket from './socket/socket-events';
 import { Messages } from './Messages/Messages';
 import { SendField } from './SendField/SendField';
+import uiAppConfig from '../../ui-app-config';
 
-const socket = io(BASE_URL, {
+const socket = io(uiAppConfig.BASE_URL, {
     autoConnect: false,
     transports: ['websocket'],
 });

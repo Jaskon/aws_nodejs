@@ -1,18 +1,43 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import path from 'path';
 import { createServer } from 'http';
 import cors from 'cors';
 import express from 'express';
 import { Server } from 'socket.io';
-import messagesRoute from './routes/messages';
+import session from 'express-session';
+import { messagesRouter } from './routers';
+// import csrf from 'csurf';
+import { githubOauthRouter } from './modules/auth';
 import { onSocketConnect } from './modules/chat/socket';
+import { redisStore } from './connections/redis';
+import appConfig, { ENV } from './app-config';
+import passport from "passport";
+import { devLocalCors, devProxyForReact } from './dev-env-init/express-app';
 
-const port = 3000;
+
+const port = appConfig.port;
 const app = express();
 const httpServer = createServer(app);
 
+// DEV
+if (appConfig.env === ENV.dev) {
+    devLocalCors(app);
+    devProxyForReact(app);
+}
 
-// CORS
-app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, '../frontend-app/build')));
+app.use(session({
+    secret: appConfig.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    store: redisStore,
+}));
+// app.use(csrf());
+app.use(passport.authenticate('session'));
 
 app.get('/users', (req, res, next) => {
     res.json([
@@ -23,8 +48,8 @@ app.get('/users', (req, res, next) => {
     next();
 });
 
-app.use(express.static(path.join(__dirname, '../frontend-app/build')));
-app.use(messagesRoute);
+app.use(messagesRouter);
+app.use(githubOauthRouter);
 
 
 // Socket.io
