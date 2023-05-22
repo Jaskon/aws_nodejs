@@ -3,18 +3,17 @@ dotenv.config();
 
 import path from 'path';
 import { createServer } from 'http';
-import cors from 'cors';
 import express from 'express';
 import { Server } from 'socket.io';
 import session from 'express-session';
 import { messagesRouter } from './routers';
 // import csrf from 'csurf';
-import { githubOauthRouter } from './modules/auth';
+import { authCommonRouter, githubOauthRouter } from './modules/auth';
 import { onSocketConnect } from './modules/chat/socket';
 import { redisStore } from './connections/redis';
 import appConfig, { ENV } from './app-config';
 import passport from "passport";
-import { devLocalCors, devProxyForReact } from './dev-env-init/express-app';
+import { devLocalCors } from './dev-env-init/express-app';
 
 
 const port = appConfig.port;
@@ -24,7 +23,6 @@ const httpServer = createServer(app);
 // DEV
 if (appConfig.env === ENV.dev) {
     devLocalCors(app);
-    devProxyForReact(app);
 }
 
 app.use(express.json());
@@ -50,6 +48,7 @@ app.get('/users', (req, res, next) => {
 
 app.use(messagesRouter);
 app.use(githubOauthRouter);
+app.use(authCommonRouter);
 
 
 // Socket.io

@@ -15,7 +15,7 @@ function to_int(value) {
 }
 
 const appConfig = {
-    env: (process.env.ENVIRONMENT || process.env.ENV) === 'prod' ? ENV.prod : ENV.dev,
+    env: /^prod/.test(process.env.ENVIRONMENT || process.env.ENV) ? ENV.prod : ENV.dev,
     port: process.env.PORT || 3000,
     uiBaseUrl: process.env.UI_BASE_URL || '/',
 
@@ -23,10 +23,10 @@ const appConfig = {
     githubAuthClientSecret: requiredEnv('GITHUB_AUTH_CLIENT_SECRET'),
     githubAuthCallbackURL: process.env.GITHUB_AUTH_CALLBACK_URL,
 
-    redisPort: to_int(requiredEnv('REDIS_PORT')),
-    redisHost: requiredEnv('REDIS_HOST'),
-    redisUsername: requiredEnv('REDIS_USERNAME'),
-    redisPassword: requiredEnv('REDIS_PASSWORD'),
+    redisPort: to_int(process.env.REDIS_PORT) || 6379,
+    redisHost: process.env.REDIS_HOST || '127.0.0.1',
+    redisUsername: process.env.REDIS_USERNAME || 'default',
+    redisPassword: process.env.REDIS_PASSWORD || '',
 
     sessionSecret: requiredEnv('SESSION_SECRET'),
 };

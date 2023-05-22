@@ -4,7 +4,7 @@ import { Strategy as GithubStrategy } from 'passport-github2';
 import appConfig, { ENV } from '../../app-config';
 import { devAuthRoute } from '../../dev-env-init/github-auth';
 
-const app = express.Router();
+const router = express.Router();
 
 
 passport.use(new GithubStrategy({
@@ -22,15 +22,15 @@ passport.use(new GithubStrategy({
 
 
 if (appConfig.env === ENV.prod) {
-    app.get('/auth/github', passport.authenticate('github', { keepSessionInfo: true }));
+    router.get('/auth/github', passport.authenticate('github', { keepSessionInfo: true }));
 
-    app.get('/auth/github/callback', passport.authenticate('github', {
+    router.get('/auth/github/callback', passport.authenticate('github', {
         successRedirect: 'http://localhost:3001',
         failureRedirect: 'http://localhost:3001/failed_log_in'
     }));
 } else {
-    devAuthRoute(app);
+    devAuthRoute(router);
 }
 
 
-export default app;
+export default router;
